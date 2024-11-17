@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:random_people_2024/core/core.dart';
 import 'package:random_people_2024/features/people_random/people_random.dart';
 
 // Logger Provider
@@ -15,31 +16,9 @@ final loggerProvider = Provider((ref) {
 });
 
 // Dio Provider
-final dioProvider = Provider((ref) {
-  final logger = ref.read(loggerProvider);
-  final dio = Dio();
-
-  // Configuración del interceptor para loggeo de errores
-  dio.interceptors.add(InterceptorsWrapper(
-    onRequest: (options, handler) {
-      logger.i('Request: ${options.method} ${options.uri}');
-      return handler.next(options);
-    },
-    onResponse: (response, handler) {
-      logger.i('Response: ${response.statusCode} ${response.data}');
-      return handler.next(response);
-    },
-    onError: (DioException error, handler) {
-      logger.e(
-        'Dio Error: ${error.message}',
-        error: error,
-        stackTrace: error.stackTrace,
-      );
-      return handler.next(error);
-    },
-  ));
-
-  return dio;
+final dioProvider = Provider<Dio>((ref) {
+  final dioClient = DioClient();
+  return dioClient.dio;
 });
 
 // Remote Datasource Provider
