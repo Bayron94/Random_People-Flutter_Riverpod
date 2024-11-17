@@ -30,9 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Random People',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      // darkTheme: AppTheme.darkTheme,
-      darkTheme: AppTheme.lightTheme,
+      theme: theme,
       onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.home,
     );

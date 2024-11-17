@@ -12,24 +12,38 @@ class DetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final detailState = ref.watch(detailProvider(personId));
-    final detailNotifier = ref.read(detailProvider(personId).notifier);
+
+    if (detailState.isLoading) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 32),
+        child: LoadingData(length: 5),
+      );
+    }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Person Detail')),
       body: detailState.when(
         data: (person) => ListView(
           children: [
+            PresentationHeader(person: person),
             AtributeCard(
               title: 'Name',
               subtitle: person.fullName,
               icon: Icons.person,
-              onTap: () {},
             ),
             AtributeCard(
               title: 'Email',
               subtitle: person.email,
               icon: Icons.email,
-              onTap: () => detailNotifier.openEmail(person.email),
+            ),
+            AtributeCard(
+              title: 'Phone',
+              subtitle: person.cell,
+              icon: Icons.email,
+            ),
+            AtributeCard(
+              title: 'Address',
+              subtitle: person.address,
+              icon: Icons.email,
             ),
           ],
         ),
