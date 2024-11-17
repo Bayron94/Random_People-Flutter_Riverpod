@@ -42,6 +42,8 @@
 - **Inyección de Dependencias:** Riverpod
 - **Control de Errores:** dartz
 - **HTTP Requests:** dio
+- **Modelos Inmutables:** Freezed para la generación de modelos inmutables, `copyWith`, serialización (`toJson`), y otras utilidades.
+- **Código Autogenerado:** Herramientas como `build_runner` para generar código de forma automática basado en anotaciones.
 
 ---
 
@@ -58,17 +60,23 @@
    flutter pub get
    ```
 
-3. **Configura el archivo `.env`:**
+3. **Genera el código autogenerado:**
+   La aplicación utiliza código autogenerado (por ejemplo, modelos y freezed). Antes de ejecutar la app, asegúrate de generar el código necesario ejecutando:
+   ```
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+4. **Configura el archivo `.env`:**
    - Crea un archivo `.env` en la raíz del proyecto basado en el archivo `.env.template`.
    - Configura la variable `API_BASE_URL` con el endpoint de la API:
-     ```
-     API_BASE_URL=https://randomuser.me/api
-     ```
+      ```
+      API_BASE_URL=https://randomuser.me/api
+      ```
 
-4. **Ejecuta la aplicación:**
-   ```
+5. **Ejecuta la aplicación:**
+    ```
    flutter run
-   ```
+    ```
 
 ---
 
